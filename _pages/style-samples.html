@@ -1,0 +1,117 @@
+---
+layout: null
+title: Style samples
+permalink: /style-samples/
+sitemap: false
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Five style studies · Jacob Way</title>
+  <link rel="stylesheet" href="{{ '/assets/css/themes.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style-preview-fonts.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style-lab.css' | relative_url }}">
+  <script src="{{ '/assets/js/style-lab.js' | relative_url }}" defer></script>
+</head>
+<body data-preview-fonts="{{ '/assets/css/style-preview-fonts.css' | relative_url }}">
+<main class="style-lab">
+  <header class="lab-intro">
+    <a class="back-link" href="{{ '/' | relative_url }}">← Website</a>
+    <p class="eyebrow">Jacob Way / Style studies</p>
+    <h1>One structure. Five different voices.</h1>
+    <p>Choose a direction, then try it on your actual pages. Each sample changes typography, color, shapes, and scale.</p>
+  </header>
+
+  <section class="style-options" aria-label="Five alternative styles">
+    <button type="button" class="style-card" data-style="paper" aria-pressed="true" aria-controls="site-preview">
+      <span class="card-label"><span>01</span> Typeset Paper <span class="card-tag">PDF</span></span>
+      <span class="mini-site">
+        <span class="mini-name">Jacob Way</span><span class="mini-rule"></span>
+        <span class="mini-heading">Research</span>
+        <span class="mini-copy">Distributed computing<br>and graph algorithms.</span>
+        <span class="mini-link">Near-Singularly Optimal APSP</span>
+        <span class="mini-meta">In submission · 2026</span>
+      </span>
+      <span class="card-caption">STIX Two Text · 15px<br>White paper, fine rules, square edges</span>
+    </button>
+    <button type="button" class="style-card" data-style="oxford" aria-pressed="false" aria-controls="site-preview">
+      <span class="card-label"><span>02</span> Oxford Ink</span>
+      <span class="mini-site">
+        <span class="mini-name">Jacob Way</span><span class="mini-rule"></span>
+        <span class="mini-heading">Research</span>
+        <span class="mini-copy">Distributed computing<br>and graph algorithms.</span>
+        <span class="mini-link">Near-Singularly Optimal APSP</span>
+        <span class="mini-meta">In submission · 2026</span>
+      </span>
+      <span class="card-caption">Source Serif 4 · 17px<br>Ivory, burgundy, generous spacing</span>
+    </button>
+    <button type="button" class="style-card" data-style="swiss" aria-pressed="false" aria-controls="site-preview">
+      <span class="card-label"><span>03</span> Swiss Grid</span>
+      <span class="mini-site">
+        <span class="mini-name">Jacob Way</span><span class="mini-rule"></span>
+        <span class="mini-heading">Research</span>
+        <span class="mini-copy">Distributed computing<br>and graph algorithms.</span>
+        <span class="mini-link">Near-Singularly Optimal APSP</span>
+        <span class="mini-meta">In submission · 2026</span>
+      </span>
+      <span class="card-caption">Inter · 16px<br>White, cobalt, bold straight lines</span>
+    </button>
+    <button type="button" class="style-card" data-style="sage" aria-pressed="false" aria-controls="site-preview">
+      <span class="card-label"><span>04</span> Soft Sage</span>
+      <span class="mini-site">
+        <span class="mini-name">Jacob Way</span><span class="mini-rule"></span>
+        <span class="mini-heading">Research</span>
+        <span class="mini-copy">Distributed computing<br>and graph algorithms.</span>
+        <span class="mini-link">Near-Singularly Optimal APSP</span>
+        <span class="mini-meta">In submission · 2026</span>
+      </span>
+      <span class="card-caption">DM Sans · 16px<br>Sage green, rounded cards, soft shadows</span>
+    </button>
+    <button type="button" class="style-card" data-style="midnight" aria-pressed="false" aria-controls="site-preview">
+      <span class="card-label"><span>05</span> Midnight</span>
+      <span class="mini-site">
+        <span class="mini-name">Jacob Way</span><span class="mini-rule"></span>
+        <span class="mini-heading">Research</span>
+        <span class="mini-copy">Distributed computing<br>and graph algorithms.</span>
+        <span class="mini-link">Near-Singularly Optimal APSP</span>
+        <span class="mini-meta">In submission · 2026</span>
+      </span>
+      <span class="card-caption">IBM Plex Sans + Mono · 15px<br>Deep slate, mint links, subtle corners</span>
+    </button>
+  </section>
+
+  <section class="style-detail" aria-live="polite">
+    <h2 id="style-name">01 / Typeset Paper</h2>
+    <p id="style-description">A white sheet on a gray desk, with serif typography, fine rules, and continuous paper surfaces. The closest to reading a typeset PDF.</p>
+  </section>
+
+  <section class="preview-area" aria-label="Full-size style preview">
+    <div class="preview-toolbar">
+      <span class="preview-label">Live sample</span>
+      <label for="theme-select">Style</label>
+      <select id="theme-select">
+        <option value="paper">01 · Typeset Paper</option><option value="oxford">02 · Oxford Ink</option>
+        <option value="swiss">03 · Swiss Grid</option><option value="sage">04 · Soft Sage</option>
+        <option value="midnight">05 · Midnight</option>
+      </select>
+      <label for="page-select">Page</label>
+      <select id="page-select">
+        <option value="combined" data-url="{{ '/' | relative_url }}">Combined home</option>
+        <option value="home" data-url="{{ '/' | relative_url }}">Standard home</option>
+        <option value="publications" data-url="{{ '/publications/' | relative_url }}">Publications</option>
+        <option value="presentations" data-url="{{ '/presentations/' | relative_url }}">Presentations</option>
+        <option value="articles" data-url="{{ '/articles/' | relative_url }}">Articles</option>
+        <option value="cv" data-url="{{ '/cv/' | relative_url }}">CV</option>
+      </select>
+      <button type="button" id="expand-preview" aria-pressed="false">Expand preview</button>
+    </div>
+    <p class="preview-status" role="status">Loading the sample…</p>
+    <iframe id="site-preview" title="Typeset Paper style preview" loading="eager"></iframe>
+  </section>
+  <noscript>Enable JavaScript to switch between the five live samples.</noscript>
+</main>
+</body>
+</html>

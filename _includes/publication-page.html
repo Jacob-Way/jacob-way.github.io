@@ -1,0 +1,33 @@
+<header class="panel publication-title">
+{% if page.authors and page.authors.size > 0 %}<p class="pubauthors">{% include authors.html authors=page.authors %}</p>{% endif %}
+<h1>{% if page.paperurl %}<a href="{% include link-url.html url=page.paperurl %}">{{ page.title | escape }}</a>{% else %}{{ page.title | escape }}{% endif %}</h1>
+<p class="publication-forum">
+{% if page.category == 'in-submission' %}In submission &#183; {% elsif page.venue %}{% if page.venueurl %}<a href="{% include link-url.html url=page.venueurl %}">{{ page.venue | escape }}</a>{% else %}{{ page.venue | escape }}{% endif %} &#183; {% elsif page.status %}{{ page.status | escape }} &#183; {% elsif page.category == 'manuscripts' %}Unpublished manuscript &#183; {% endif %}
+{% if page.date %}<time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%B %-d, %Y' }}</time>{% endif %}{% if page.paperurl %} &#183; <a href="{% include link-url.html url=page.paperurl %}">Download Paper</a>{% endif %}
+{% if page.doi %}<span class="light"> &#183; doi: <a href="https://doi.org/{{ page.doi | escape }}">{{ page.doi | escape }}</a></span>{% endif %}
+</p>
+</header>
+{% if page.paperurl or page.publisherurl or page.arxivurl or page.slidesurl or page.bibtexurl or page.video_url %}
+<nav class="publication-buttons" aria-label="Paper versions and resources">
+{% if page.paperurl %}<a href="{% include link-url.html url=page.paperurl %}">authors’ version</a>{% endif %}
+{% if page.publisherurl %}<a href="{% include link-url.html url=page.publisherurl %}">publisher’s version</a>{% endif %}
+{% if page.arxivurl %}<a href="{% include link-url.html url=page.arxivurl %}">arXiv.org</a>{% endif %}
+{% if page.slidesurl %}<a href="{% include link-url.html url=page.slidesurl %}">slides</a>{% endif %}
+{% if page.bibtexurl %}<a href="{% include link-url.html url=page.bibtexurl %}">BibTeX</a>{% endif %}
+{% if page.video_url %}<a href="{% include link-url.html url=page.video_url %}">video</a>{% endif %}
+</nav>
+{% endif %}
+{% assign body = content | strip %}
+{% if page.abstract or page.excerpt or body != '' %}
+<section class="panel publication-block" aria-labelledby="abstract">
+<h2 id="abstract">Abstract</h2>
+{% if page.abstract %}{{ page.abstract | markdownify }}{% elsif body != '' %}{{ content }}{% else %}{{ page.excerpt | markdownify }}{% endif %}
+</section>
+{% endif %}
+{% if page.abstract and body != '' %}<section class="panel publication-block">{{ content }}</section>{% endif %}
+{% if page.publication_details or page.citation %}
+<section class="panel publication-block" aria-labelledby="publication">
+<h2 id="publication">Publication</h2>
+{% if page.publication_details %}{{ page.publication_details | markdownify }}{% else %}<p>{{ page.citation }}</p>{% endif %}
+</section>
+{% endif %}

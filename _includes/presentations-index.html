@@ -1,0 +1,26 @@
+{% assign presentations = site.presentations | where_exp: 'item', 'item.published != false' | sort: 'date' | reverse %}
+{% unless include.combined %}
+<nav class="section-tabs" aria-label="Presentation types"><a href="#talks">Talks</a><a href="#posters">Posters</a></nav>
+{% endunless %}
+<section class="panel publication-block" aria-labelledby="talks">
+<h2 id="talks">Talks</h2>
+{% capture talk_items %}
+{% for post in presentations %}
+{% assign presentation_type = post.type | default: 'Talk' | downcase %}
+{% unless presentation_type == 'poster' %}{% include presentation-item.html %}{% endunless %}
+{% endfor %}
+{% endcapture %}
+{% assign talk_items = talk_items | strip %}
+{% if talk_items != '' %}<ul>{{ talk_items }}</ul>{% endif %}
+</section>
+<section class="panel publication-block" aria-labelledby="posters">
+<h2 id="posters">Posters</h2>
+{% capture poster_items %}
+{% for post in presentations %}
+{% assign presentation_type = post.type | default: 'Talk' | downcase %}
+{% if presentation_type == 'poster' %}{% include presentation-item.html %}{% endif %}
+{% endfor %}
+{% endcapture %}
+{% assign poster_items = poster_items | strip %}
+{% if poster_items != '' %}<ul>{{ poster_items }}</ul>{% endif %}
+</section>

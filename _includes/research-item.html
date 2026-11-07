@@ -1,0 +1,6 @@
+<article class="research-item">
+<h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+{% if post.authors and post.authors.size > 0 %}<p class="authors">{% include authors.html authors=post.authors %}</p>{% endif %}
+{% include item-meta.html item=post %}
+{% if post.excerpt %}<div class="item-description">{{ post.excerpt | markdownify }}</div>{% endif %}
+</article>

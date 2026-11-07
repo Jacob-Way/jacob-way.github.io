@@ -1,0 +1,13 @@
+{% assign only_combined_tabs = true %}
+{% unless page.url == '/' %}{% assign only_combined_tabs = false %}{% endunless %}
+{% for item in site.data.navigation.main %}
+{% unless item.url == '/publications/' or item.url == '/presentations/' or item.url == '/articles/' or item.url == '/cv/' %}{% assign only_combined_tabs = false %}{% endunless %}
+{% endfor %}
+<nav aria-label="Main navigation"{% if only_combined_tabs %} data-combined-only{% endif %}>
+<ul class="navigation">
+{% unless page.url == '/' %}<li><a href="{{ '/' | relative_url }}">Home</a></li>{% endunless %}
+{% for item in site.data.navigation.main %}
+<li{% if item.url == '/publications/' or item.url == '/presentations/' or item.url == '/articles/' or item.url == '/cv/' %} data-combined-tab{% endif %}><a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title | escape }}</a></li>
+{% endfor %}
+</ul>
+</nav>

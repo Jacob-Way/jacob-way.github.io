@@ -4,7 +4,6 @@ FROM ruby:3.2
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
-    nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -27,8 +26,6 @@ COPY Gemfile ./
 
 
 # Install bundler and dependencies
-RUN gem install connection_pool:2.5.0
-RUN gem install bundler:2.3.26
 RUN bundle install
 
 # Command to serve the Jekyll site

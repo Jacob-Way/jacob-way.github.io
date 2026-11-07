@@ -1,0 +1,5 @@
+{% assign sections = include.content | split: '<!-- section -->' %}
+{% for section in sections %}
+{% assign section_content = section | strip %}
+{% if section_content != '' %}<section class="panel page sectioned-page">{{ section_content }}</section>{% endif %}
+{% endfor %}

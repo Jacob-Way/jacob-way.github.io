@@ -1,0 +1,22 @@
+{% assign papers = site.publications | where_exp: 'paper', 'paper.published != false' | sort: 'date' | reverse %}
+{% assign publication_years = papers | group_by_exp: 'paper', 'paper.date | date: "%Y"' %}
+{% unless include.combined %}
+<header class="panel publication-title">
+<h1><span class="subtitle"><a href="{{ '/' | relative_url }}">{{ site.data.profile.name | default: site.title | escape }}</a>:</span> Publications</h1>
+</header>
+{% if publication_years.size > 0 %}
+<nav class="publication-years" aria-label="Publication years">
+{% for year in publication_years %}<a href="#year{{ year.name }}">{{ year.name }}</a>{% endfor %}
+</nav>
+{% endif %}
+{% endunless %}
+{% for year in publication_years %}
+<section class="panel publication-block" aria-labelledby="year{{ year.name }}">
+<h2 id="year{{ year.name }}">{{ year.name }}</h2>
+<ul class="publication-list">
+{% for post in year.items %}
+<li>{% if post.authors and post.authors.size > 0 %}{% include authors.html authors=post.authors format='citation' link=false %}: {% endif %}<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a><span class="light">{% if post.category == 'in-submission' %} &#183; In submission{% elsif post.venue %} &#183; {{ post.venue | escape }}{% elsif post.status %} &#183; {{ post.status | escape }}{% elsif post.category == 'manuscripts' %} &#183; Unpublished manuscript{% endif %}{% if post.date %} &#183; <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%B %-d, %Y' }}</time>{% endif %}</span>{% if post.paperurl %} &#183; <a href="{% include link-url.html url=post.paperurl %}">Download Paper</a>{% endif %}</li>
+{% endfor %}
+</ul>
+</section>
+{% endfor %}

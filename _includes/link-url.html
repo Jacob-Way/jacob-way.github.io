@@ -1,0 +1,5 @@
+{%- if include.url contains '://' or include.url contains 'mailto:' or include.url contains '//' -%}
+{{- include.url | escape -}}
+{%- else -%}
+{{- include.url | relative_url | escape -}}
+{%- endif -%}

@@ -1,0 +1,21 @@
+{% assign papers = site.publications | where_exp: 'paper', 'paper.published != false' | sort: 'date' | reverse %}
+{% if site.publication_category %}
+{% for category in site.publication_category %}
+{% assign category_papers = papers | where: 'category', category[0] %}
+{% if category_papers.size > 0 %}
+<section aria-labelledby="{{ category[0] | slugify }}">
+<h2 id="{{ category[0] | slugify }}">{{ category[1].title | escape }}</h2>
+{% for post in category_papers %}{% include research-item.html %}{% endfor %}
+</section>
+{% endif %}
+{% endfor %}
+{% capture other_papers %}
+{% for post in papers %}
+{% unless site.publication_category[post.category] %}{% include research-item.html %}{% endunless %}
+{% endfor %}
+{% endcapture %}
+{% assign other_papers = other_papers | strip %}
+{% if other_papers != '' %}<section><h2>Other Research</h2>{{ other_papers }}</section>{% endif %}
+{% else %}
+{% for post in papers %}{% include research-item.html %}{% endfor %}
+{% endif %}

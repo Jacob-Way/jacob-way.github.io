@@ -1,0 +1,13 @@
+<script>
+  // Select the layout before styles or page content can paint.
+  (() => {
+    const parameters = new URLSearchParams(location.search);
+    let compressed = true;
+    if (parameters.get('style-preview') === '1') {
+      compressed = parameters.get('compressed') === 'true';
+    } else {
+      try { compressed = localStorage.getItem('homepage-compressed') !== 'false'; } catch (_) { /* Keep the default. */ }
+    }
+    document.documentElement.dataset.homeView = compressed ? 'compressed' : 'expanded';
+  })();
+</script>

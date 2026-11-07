@@ -1,0 +1,122 @@
+/* Shared typography and panel layout, matching jukkasuomela.fi. */
+:root { color-scheme: light; }
+* { box-sizing: border-box; line-height: 1.4; }
+html { background: #f0f0f0; font-size: medium; }
+body {
+  margin: 0;
+  color: #000;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1em;
+  overflow-wrap: break-word;
+}
+.site { width: 100%; max-width: 842px; min-width: 392px; margin: 0 auto; }
+.panel { margin: 20px; padding: 18px 25px; background: #fff; border: 1px solid #000; box-shadow: 2px 2px 2px #ccc; }
+h1 { margin: 0 0 20px; font-size: 2em; font-weight: 400; }
+h2, h3 { margin: 30px 0 20px; font-size: 1em; font-weight: 700; text-transform: uppercase; }
+p { margin: 1em 0; }
+ul, ol { margin: 1em 0 1em 1.5em; padding: 0; }
+li { margin: .7em 0; }
+strong { font-weight: 700; }
+.light, .site-footer { font-weight: 300; }
+a { color: #000; text-decoration: none; border-bottom: 1px solid #666; padding: 0 1px; }
+a:hover, a:active { color: #fff; background: #000; border-color: #000; box-shadow: 2px 2px 2px #ccc; }
+a:focus-visible { outline: 2px solid #195c9e; outline-offset: 4px; }
+.page-title h1, .publication-title h1, .profile h1 { margin: 0; font-weight: 700; }
+.subtitle { font-weight: 400; }
+.page > :first-child { margin-top: 0; }
+.panel > p:last-child, .panel > ul:last-child, .profile-content > :last-child { margin-bottom: 7px; }
+.section-title, .home-content > h2:first-child, .publication-block > h2:first-child, .sectioned-page > h2:first-child {
+  margin: 0 0 20px;
+  font-size: 2em;
+  font-weight: 400;
+  text-transform: none;
+}
+.profile { padding: 0; }
+.profile-content { padding: 18px 25px; }
+.profile h1 + p { margin-top: 25px; }
+.profile-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.profile-heading + p { margin-top: 25px; }
+.compress-toggle { flex: none; border: 1px solid #000; border-radius: 4px; padding: 2px 7px; color: #000; background: #fff; font: inherit; cursor: pointer; }
+.compress-toggle:hover, .compress-toggle[aria-pressed="true"] { color: #fff; background: #000; }
+.compress-toggle:focus-visible { outline: 2px solid #195c9e; outline-offset: 4px; }
+.compress-toggle:disabled { cursor: wait; opacity: .6; }
+html[data-home-view="expanded"] .home-combined { display: none; }
+html[data-home-view="compressed"] .home-grid :is([data-combined-tab], nav[data-combined-only]) { display: none; }
+.home-grid [hidden] { display: none !important; }
+.home-center, .home-left, .home-right { min-width: 0; }
+.combined-title h2 { margin: 0; font-size: 2em; font-weight: 400; text-transform: none; }
+.home-combined .publication-block > h3:first-child, .home-combined .sectioned-page > h3:first-child { margin: 0 0 20px; font-size: 2em; font-weight: 400; text-transform: none; }
+.home-combined section[id], .home-combined [id] { scroll-margin-top: 20px; }
+@media (min-width: 1100px) {
+  html[data-home-view="compressed"] .site { max-width: 1544px; }
+  html[data-home-view="compressed"] .home-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr) minmax(0, 1fr); align-items: start; }
+  html[data-home-view="compressed"] .home-center { grid-column: 2; grid-row: 1; }
+  html[data-home-view="compressed"] .home-left { grid-column: 1; grid-row: 1; }
+  html[data-home-view="compressed"] .home-right { grid-column: 3; grid-row: 1; }
+  html[data-home-view="compressed"] .home-left .panel { margin-right: 0; padding: 18px; }
+  html[data-home-view="compressed"] .home-right .panel { margin-left: 0; padding: 18px; }
+}
+.profile-photo { display: block; width: 100%; height: auto; }
+.home-news > section { scroll-margin-top: 20px; }
+.home-news h3 { margin: 30px 0 20px; }
+.navigation { display: flex; flex-wrap: wrap; justify-content: center; list-style: none; margin: 20px 0 0; padding: 0; }
+.navigation li { margin: 0; }
+.navigation a, .section-tabs a, .publication-years a {
+  display: inline-block;
+  border: 0;
+  margin: 0 8px;
+  padding: 2px 5px;
+  font-size: .9em;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.navigation [aria-current="page"] { font-weight: 700; }
+.section-tabs, .publication-years, .publication-buttons { margin: 20px; text-align: center; }
+.publication-title .pubauthors { margin: 0 0 20px; font-size: 1.3em; font-weight: 400; }
+.publication-title .publication-forum { margin: 25px 0 7px; }
+.publication-buttons a { display: inline-block; border: 1px solid #000; border-radius: 4px; padding: 2px 7px; margin: 4px 8px; background: #fff; box-shadow: 2px 2px 2px #ccc; }
+.publication-buttons a:hover { background: #000; }
+.publication-list { margin: 1em 0 7px 1.5em; }
+.research-item { margin: 26px 0 30px; }
+.research-item:last-child { margin-bottom: 7px; }
+.research-item h3 { margin: 0 0 6px; font-size: 1em; text-transform: none; }
+.research-item p { margin: 0 0 10px; }
+.item-meta, .authors { font-size: 1em; }
+.resource-link { display: inline-block; }
+.item-description p:last-child { margin-bottom: 0; }
+.back-link { margin-top: 30px; }
+.site-footer { margin: 20px 20px 20px 40px; text-align: right; }
+.site-footer small { font-size: 1em; }
+img, video { max-width: 100%; height: auto; }
+table { border-collapse: collapse; }
+td, th { padding: 5px 0; text-align: left; vertical-align: top; }
+td + td, th + td, td + th, th + th { padding-left: 20px; }
+pre { overflow-x: auto; padding: 5px 9px; border: 1px solid #aaa; }
+code { font-size: .9em; }
+blockquote { margin: 20px 0; padding-left: 20px; border-left: 2px solid #aaa; }
+.skip-link { position: absolute; top: -100px; left: 16px; padding: 10px 14px; background: white; z-index: 1; }
+.skip-link:focus { top: 8px; }
+
+/* Keep wide display equations inside their panel on narrow screens. */
+mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .25em 0; }
+
+@media (max-width: 800px) {
+  .site { min-width: 200px; }
+  .panel { margin-left: 0; margin-right: 0; border-left: 0; border-right: 0; padding: 9px 12px; box-shadow: none; }
+  .profile { padding: 0; }
+  .profile-content { padding: 9px 12px; }
+  .profile, .page-title, .publication-title { margin-top: 0; }
+  .section-tabs, .publication-years, .publication-buttons { margin: 10px; }
+  .site-footer { margin: 10px 10px 10px 20px; }
+}
+
+@media print {
+  html, body { background: white; font-size: 11pt; }
+  .site { width: 100%; min-width: 0; margin: 0; }
+  .panel { margin: 0 0 20px; padding: 0; border: 0; box-shadow: none; }
+  .profile-content { padding: 0; }
+  nav, .skip-link, .site-footer, .back-link, .compress-toggle { display: none; }
+  html[data-home-view="compressed"] .home-grid { display: block; }
+  .research-item { break-inside: avoid; }
+}
+

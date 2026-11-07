@@ -1,31 +1,56 @@
----
-layout: compress
----
-
-{% include base_path %}
-
+{% assign publication_style = false %}
+{% if page.collection == 'publications' or page.publications_index %}{% assign publication_style = true %}{% endif %}
 <!doctype html>
-<html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
+<html lang="{{ site.locale | default: 'en' | slice: 0, 2 }}" data-site-style="paper" data-site-font="source-sans"{% if page.layout == 'home' %} data-home-view="compressed"{% endif %}>
   <head>
-    {% include head.html %}
-    {% include head/custom.html %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if page.layout == 'home' %}{% include home-view.html %}{% endif %}
+    <title>{% if page.url != '/' and page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
+    <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}">
+    <link rel="canonical" href="{{ page.url | replace: 'index.html', '' | absolute_url }}">
+    <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+    <meta property="og:description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/themes.css' | relative_url }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&amp;display=swap">
+    <link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+    {% include math.html %}
   </head>
-
-  <body>
-
-    {% include browser-upgrade.html %}
-    {% include masthead.html %}
-
-    {{ content }}
-
-    <div class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include footer.html %}
+  <body{% if publication_style %} class="publication-site"{% endif %}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site">
+      {% unless page.layout == 'home' or publication_style %}
+        <header class="panel page-title">
+          <h1><span class="subtitle"><a href="{{ '/' | relative_url }}">{{ site.data.profile.name | default: site.title | escape }}</a>:</span> {{ page.title | escape }}</h1>
+        </header>
+      {% endunless %}
+      <main id="main">
+        {% if page.collection == 'publications' %}
+          {% include publication-page.html %}
+        {% elsif page.publications_index or page.panel_index or page.layout == 'home' %}
+          {{ content }}
+        {% elsif page.sections %}
+          {% include sections.html content=content %}
+        {% else %}
+          <article class="panel page">
+            {% if page.date %}{% include item-meta.html item=page %}{% endif %}
+            {% if page.collection == 'presentations' and page.venue %}<p>{% if page.type %}{{ page.type | escape }} · {% endif %}{{ page.venue | escape }}{% if page.location %} · {{ page.location | escape }}{% endif %}</p>{% endif %}
+            {% assign body = content | strip %}
+            {% if body != '' %}{{ content }}{% elsif page.excerpt %}{{ page.excerpt | markdownify }}{% endif %}
+            {% if page.citation %}<p class="citation">{{ page.citation }}</p>{% endif %}
+            {% if page.collection == 'presentations' %}<p class="back-link"><a href="{{ '/presentations/' | relative_url }}">All presentations</a></p>{% endif %}
+            {% if page.collection == 'articles' %}<p class="back-link"><a href="{{ '/articles/' | relative_url }}">All articles</a></p>{% endif %}
+          </article>
+        {% endif %}
+      </main>
+      {% unless page.collection == 'publications' %}
+      <footer class="site-footer">
+        <small>This page was last updated on {{ site.time | date: '%Y-%m-%d' }}</small>
       </footer>
+      {% endunless %}
     </div>
-
-    {% include scripts.html %}
-
   </body>
 </html>

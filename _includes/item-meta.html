@@ -1,0 +1,10 @@
+{% assign item = include.item %}
+<p class="item-meta">
+{% if item.venue and item.collection == 'publications' %}<span>{{ item.venue | escape }}</span> · {% endif %}
+{% if item.date %}<time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%B %-d, %Y' }}</time>{% endif %}
+{% if item.paperurl %}<span class="resource-link"> · <a href="{% include link-url.html url=item.paperurl %}">Download Paper</a></span>{% endif %}
+{% if item.slidesurl %}<span class="resource-link"> · <a href="{% include link-url.html url=item.slidesurl %}">Slides</a></span>{% endif %}
+{% if item.posterurl %}<span class="resource-link"> · <a href="{% include link-url.html url=item.posterurl %}">Download Poster</a></span>{% endif %}
+{% if item.bibtexurl %}<span class="resource-link"> · <a href="{% include link-url.html url=item.bibtexurl %}">BibTeX</a></span>{% endif %}
+{% if item.video_url %}<span class="resource-link"> · <a href="{% include link-url.html url=item.video_url %}">Video</a></span>{% endif %}
+</p>

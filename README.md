@@ -1,101 +1,203 @@
-# Academic Pages
-**Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
+# Jacob Way's website
 
-![Academic Pages template example](images/themes/homepage-light.png "Academic Pages template example")
+A small Jekyll site: Markdown content, shared HTML layouts, and one stylesheet. No JavaScript build or Node installation is needed.
 
-# Getting Started
+## Where to edit
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Click the "Use this template" button in the top right.
-1. On the "New repository" page, enter your public repository name as "[your GitHub username].github.io", which will also be your website's URL.
-1. Edit site-wide configuration in `_config.yml` and double check that the `url` is the one that you just selected in the previous step and that `repository` reflects the correct path for your repository.
-1. Add your site content, upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.
-1. Check status by going to the repository settings, under: Settings -> Pages -> Source: GitHub Actions
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+| Content | File or folder |
+| --- | --- |
+| Home page research text | `_pages/about.md` |
+| Home page awards, teaching, and conferences | `_data/home.yml` |
+| Publications page | `_pages/publications.md` |
+| Presentations page (Talks and Posters) | `_pages/presentations.md` |
+| Articles page headings and Lecture Notes | `_includes/content/articles.md` |
+| DC Articles and Other Articles | `_articles/` |
+| CV content | `_includes/content/cv.md` |
+| Teaching and blog pages | `_pages/teaching.md`, `_pages/blog.md` |
+| Papers | `_publications/` |
+| Author names and links | `_data/authors.yml` |
+| Talk and poster entries | `_presentations/` |
+| Navigation links and their order | `_data/navigation.yml` |
+| Name, contact details, optional photo | `_data/profile.yml` |
+| Site settings and publication categories | `_config.yml` |
+| Appearance | `assets/css/site.css` |
+| PDFs and other downloads | `files/` |
 
-See more info at https://academicpages.github.io/
+## Add a page
 
-### Additional Tutorials
+Create a Markdown file in `_pages/`. The shared layout is automatic; only a title and URL are needed:
 
-Additional tutorials for working with the Academic Pages template can be found at the following sites:
-- https://jayrobwilliams.com/posts/2020/06/academic-website/
+```markdown
+---
+title: "Notes"
+permalink: /notes/
+---
 
-## Running locally
-
-When you are initially working on your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
-
-1. Clone the repository and made updates as detailed above.
-
-### Using a different IDE
-1. Make sure you have ruby-dev, bundler, and nodejs installed
-    
-    On most Linux distributions and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
-    ```bash
-    sudo apt install ruby-dev ruby-bundler nodejs
-    ```
-    If you see error `Unable to locate package ruby-bundler`, `Unable to locate package nodejs `, run the following:
-    ```bash
-    sudo apt update && sudo apt upgrade -y
-    ```
-    then try running `sudo apt install ruby-dev ruby-bundler nodejs` again.
-
-    On MacOS the commands are:
-    ```bash
-    brew install ruby
-    brew install node
-    gem install bundler
-    ```
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-
-    If you see file permission error like `Fetching bundler-2.6.3.gem ERROR:  While executing gem (Gem::FilePermissionError) You don't have write permissions for the /var/lib/gems/3.2.0 directory.` or `Bundler::PermissionError: There was an error while trying to write to /usr/local/bin.`
-    Install Gems Locally (Recommended):
-    ```bash
-    bundle config set --local path 'vendor/bundle'
-    ```
-    then try run `bundle install` again. If succeeded, you should see a folder called `vendor` and `.bundle`.
-
-1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change to Markdown (*.md) and HTML files, while changes to the core template and configuration (i.e., `_config.yml`) will require stopping and restarting Jekyll.
-    You may also try `bundle exec jekyll serve -l -H localhost` to ensure jekyll to use specific dependencies on your own local machine.
-
-If you are running on Linux it may be necessary to install some additional dependencies prior to being able to run locally: `sudo apt install build-essential gcc make`
-
-## Using Docker
-
-Working from a different OS, or just want to avoid installing dependencies? You can use the provided `Dockerfile` to build a container that will run the site for you if you have [Docker](https://www.docker.com/) installed.
-
-You can build and execute the container by running the following command in the repository:
-
-```bash
-chmod -R 777 .
-docker compose up
+Write your page here using normal Markdown.
 ```
 
-You should now be able to access the website from `localhost:4000`.
+To add it to the navigation, add an entry under `main:` in `_data/navigation.yml`:
 
-### Using the DevContainer in VS Code
+```yaml
+  - title: "Notes"
+    url: /notes/
+```
 
-If you are using [Visual Studio Code](https://code.visualstudio.com/) you can use the [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) that comes with this Repository. Normally VS Code detects that a development container configuration is available and asks you if you want to use the container. If this doesn't happen you can manually start the container by **F1->DevContainer: Reopen in Container**. This restarts your VS Code in the container and automatically hosts your academic page locally on http://localhost:4000. All changes will be updated live to that page after a few seconds.
+Removing a navigation entry hides the link while preserving the page's URL.
 
-# Maintenance
+Home navigation includes Publications, Presentations, Articles, and CV. Blog, Portfolio, and Teaching remain accessible by URL without navigation links.
 
-Bug reports and feature requests to the template should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
+The home page opens in compressed view by default. The **compress** toggle beside the home-page name combines Publications and Presentations in the left column, Articles in the right column, and the CV below the home content. Those four navigation tabs are hidden while compressed; inline links jump to the combined sections. Press compress again to restore the usual layout. The choice is remembered in the visitor's browser. On narrow screens the columns stack. The combined sections are rendered during the Jekyll build and arrive in the initial HTML, so the layout does not wait for JavaScript or extra page requests. A small script in the page head reads the saved view before the first paint. Publications and Presentations reuse their existing includes; Articles and the CV each have one shared Markdown source in `_includes/content/`, used by both the home view and their standalone pages.
 
-This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii), and additional maintainers would be welcome.
+Five visual alternatives are available at `/style-samples/`: Typeset Paper (PDF-like), Oxford Ink, Swiss Grid, Soft Sage, and Midnight. The comparison page lets you switch styles and preview any main page, including both home layouts. The site uses the Paper layout with Source Sans 3 for text and headings, and normal capitalization for the name. The comparison controls show the original style samples and preserve the saved compression preference. Edit the shared themes in `assets/css/themes.css` and the comparison interface in `_pages/style-samples.html`.
 
-## Bugfixes and enhancements
+Home-page awards, teaching, and conference details are Markdown fields in `_data/home.yml`. Indent each line by two spaces after the `|`. Empty fields leave the section heading available without showing sample claims. Teaching details also appear on `/teaching/`; add longer course material in `_pages/teaching.md`.
 
-If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of the template to your fork as well.
+The main pages use `/publications/`, `/presentations/`, and `/articles/`. The old `/research/` address redirects to Publications, `/talks/` redirects to Presentations, and `/works/` redirects to Articles. DC Articles and Other Articles are listed automatically from `_articles/`; edit Lecture Notes in `_includes/content/articles.md`. Each `<!-- section -->` starts a new white panel. Any new Markdown page can use the same panel format by adding `sections: true` to its metadata.
 
-Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize, although [rebasing](https://git-scm.com/docs/git-rebase) the changes from this template will work along with manually [cherry picking](https://git-scm.com/docs/git-cherry-pick) the relevant commits. If you are not comfortable with the Git command line, you can save your various `.yml` configuration files and Markdown files, delete the repository, and fork it again. 
+## Write mathematics
 
+All Markdown pages, posts, publications, presentations, articles, and fields rendered with `markdownify` support LaTeX math automatically. No per-page setting is needed:
+
+```markdown
+An inline bound is $T(n) = O(n \log n)$.
+
+$$
+\Pr[X \ge t] \le \frac{\mathbb{E}[X]}{t}.
+$$
+```
+
+Use `$...$` for inline math and `$$...$$` for display equations. Code spans and fenced code blocks stay literal. Use `\$` for a literal dollar sign. MathJax loads from its CDN when a page opens.
+
+The parser in `_plugins/math.rb` protects TeX commands from Markdown formatting. Restart an existing Jekyll server once after installing this update. Run `bundle exec ruby _tests/math.rb` to check the Markdown conversion; the deployment workflow runs it before building.
+
+## Add a paper
+
+Create `_publications/my-paper.md`:
+
+```markdown
 ---
-<div align="center">
-    
-![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/academicpages/academicpages.github.io.svg)](https://github.com/academicpages/academicpages.github.io/graphs/contributors)
-[![GitHub release](https://img.shields.io/github/v/release/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/academicpages/academicpages.github.io?color=blue)](https://github.com/academicpages/academicpages.github.io/blob/master/LICENSE)
+title: "My Paper"
+date: 2026-11-06
+category: manuscripts
+authors:
+  - jacob-way
+paperurl: /files/my-paper.pdf
+excerpt: "A short description of the result."
+---
 
-[![GitHub stars](https://img.shields.io/github/stars/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io)
-[![GitHub forks](https://img.shields.io/github/forks/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/fork)
-</div>
+Optional longer description or abstract.
+```
+
+Upload the PDF to `files/`. The paper automatically appears on Publications with its full date and download link. Its default detail URL is `/publication/my-paper/`; add `permalink:` to preserve or choose another URL. An empty body uses the excerpt on the detail page.
+
+The Publications page groups papers by year, with authors before each title. Each paper's detail page has linked authors above its PDF-linked title, resource buttons, an Abstract panel, and an optional Publication panel. The CV keeps the category grouping from `publication_category` in `_config.yml`.
+
+Use `venue: "Under submission"` or `venue: "Unpublished manuscript"` when appropriate. Other optional fields include `venueurl`, `status`, `publisherurl`, `arxivurl`, `doi`, `slidesurl`, `bibtexurl`, and `video_url`. Add `abstract: |` for a separate Markdown abstract and `publication_details: |` for Markdown publication information, or use `citation` for an existing HTML citation. Empty panels and missing resource buttons are hidden. Use `#` for YAML comments.
+
+## Author names and links
+
+Edit `_data/authors.yml` to add an author or change a link everywhere:
+
+```yaml
+jacob-way:
+  name: Jacob Way
+  url: /
+```
+
+Each paper's `authors:` is a YAML list of these keys in the paper's author order. Leave an author's `url` empty to show their name without a link. A name or key missing from the directory is shown as plain text. These changes reload immediately; no server restart is needed.
+
+The Near-Singularly Optimal APSP entry has its author list from the PDF. The other two entries have editable empty lists because their PDFs omit or anonymize the authors; fill these in when ready.
+
+Set `published: false` to keep an unfinished entry out of the site. The two `energy-efficient-*.md` files are retained as drafts because their current metadata duplicates the APSP entry; replace that metadata before publishing them.
+
+## Add a presentation
+
+Create `_presentations/my-talk.md`:
+
+```markdown
+---
+title: "My Talk"
+date: 2026-11-06
+type: Talk
+venue: "University of Houston"
+location: "Houston, TX"
+slidesurl: /files/my-talk.pdf
+---
+
+Optional description.
+```
+
+Talks and posters share `_presentations/` and appear in separate sections at `/presentations/`. Use `type: Talk` or `type: Poster`; a missing type defaults to Talk. Both section headings remain visible when empty. The latest three presentations are previewed on the home page, and all presentations appear on the CV. The default detail URL is `/presentations/my-talk/`. The existing talk's old URL redirects to its new address.
+
+For a poster, create `_presentations/my-poster.md`:
+
+```markdown
+---
+title: "My Poster"
+type: Poster
+date: 2026-11-06
+permalink: /presentations/my-poster/
+venue: "Research Day"
+posterurl: /files/my-poster.pdf
+---
+
+Optional description or abstract.
+```
+
+Add the poster PDF to `files/`. Its download link appears on the presentation page and next to its entry in the list.
+
+## Add an article
+
+Create `_articles/my-article.md`:
+
+```markdown
+---
+title: "My Article"
+category: dc
+date: 2026-11-06
+---
+
+Write the article here using Markdown and LaTeX math.
+```
+
+Use `category: dc` for DC Articles or `category: other` for Other Articles. Each file appears automatically in the matching section, sorted newest first by its front-matter `date` (the article's creation date), and has a detail page at `/articles/my-article/`. Set `date: YYYY-MM-DD` explicitly; backdating it changes the article's position in both home and standalone lists. A `permalink:` field can override the address. Use `published: false` to hide an unfinished article. Titles, categories, and dates belong in the front matter; no layout or collection setting is needed.
+
+Lecture Notes are editable in `_includes/content/articles.md`. Restart an existing Jekyll server once after this collection change; subsequent article and presentation edits rebuild automatically.
+
+## Optional photo
+
+Add your photo to `images/` and set `avatar` in `_data/profile.yml` to its filename, such as `portrait.jpg`. Leave it blank to show the home page without a photo. Profile changes reload automatically.
+
+## Add a blog post
+
+Create the `_posts/` folder if needed, then add a file named `YYYY-MM-DD-my-post.md`:
+
+```markdown
+---
+title: "My Post"
+---
+
+Write the post in Markdown. Its date comes from the filename.
+```
+
+The post appears automatically at `/year-archive/`. Uncomment Blog in `_data/navigation.yml` to show the navigation link. Future-dated posts stay hidden until their date.
+
+## Preview and publish
+
+With Ruby and Bundler installed, run:
+
+```sh
+bundle install
+bundle exec jekyll serve --livereload
+```
+
+Open <http://localhost:4000/>. Content and stylesheet changes rebuild automatically. Restart the server after changing `_config.yml`.
+
+To check a production build:
+
+```sh
+bundle exec jekyll build
+```
+
+Commit and push changes to `master` to publish through the GitHub Pages workflow. In repository settings, Pages should use **GitHub Actions** as its source. The previous `/research/` URL redirects to `/publications/`.

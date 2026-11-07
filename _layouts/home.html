@@ -1,0 +1,75 @@
+---
+layout: default
+---
+<div class="home-grid">
+<div class="home-center">
+<header class="panel profile">
+  {% if site.data.profile.avatar and site.data.profile.avatar != '' %}
+    <img class="profile-photo" src="{{ site.data.profile.avatar | prepend: '/images/' | relative_url }}" alt="{{ site.data.profile.name | escape }}">
+  {% endif %}
+  <div class="profile-content">
+    <div class="profile-heading">
+      <h1>{{ site.data.profile.name | default: site.title | escape }}</h1>
+      <!-- <button class="compress-toggle" type="button" aria-pressed="true" aria-controls="home-left home-right home-cv" title="Combine publications, presentations, articles, and CV on this page" hidden>compress</button> -->
+    </div>
+    {% if site.data.profile.affiliation %}<p>{{ site.data.profile.affiliation | escape }}</p>{% endif %}
+    <ul class="contact-list">
+      {% if site.data.profile.email %}<li>Email: <a href="mailto:{{ site.data.profile.email | escape }}">{{ site.data.profile.email | escape }}</a></li>{% endif %}
+      {% if site.data.profile.github %}<li><a href="https://github.com/{{ site.data.profile.github | escape }}">GitHub</a></li>{% endif %}
+    </ul>
+    {% include navigation.html %}
+  </div>
+</header>
+<section class="panel page home-content" aria-label="About and research">
+  {{ content }}
+</section>
+<section class="panel page home-news" aria-labelledby="news">
+  <h2 class="section-title" id="news">News</h2>
+  <section aria-labelledby="presentations">
+    <h3 id="presentations">Presentations</h3>
+    {% assign home_presentations = site.presentations | where_exp: 'item', 'item.published != false' | sort: 'date' | reverse %}
+    {% if home_presentations.size > 0 %}
+      <ul>{% for post in home_presentations limit: 3 %}{% include presentation-item.html %}{% endfor %}</ul>
+    {% endif %}
+    <!-- <p><a href="{{ '/presentations/' | relative_url }}">All presentations</a></p> -->
+  </section>
+  <!-- <section aria-labelledby="awards">
+    <h3 id="awards">Awards</h3>
+    {{ site.data.home.awards | markdownify }}
+  </section> -->
+  <!-- <section aria-labelledby="teaching">
+    <h3 id="teaching">Teaching</h3>
+    {{ site.data.home.teaching | markdownify }}
+    <p><a href="{{ '/teaching/' | relative_url }}">Courses and teaching materials</a></p>
+  </section> -->
+  <!-- <section aria-labelledby="conferences">
+    <h3 id="conferences">Conferences</h3>
+    {{ site.data.home.conferences | markdownify }}
+  </section> -->
+</section>
+<section class="home-combined" id="home-cv" data-source="{{ '/cv/' | relative_url }}" aria-labelledby="combined-cv-title">
+  <header class="panel combined-title"><h2 id="combined-cv-title">CV</h2></header>
+  {% capture home_cv_content %}{% include content/cv.md %}{% endcapture %}
+  <div data-combined-content><article class="panel page">{{ home_cv_content | markdownify }}</article></div>
+</section>
+</div>
+<aside class="home-combined home-left" id="home-left" aria-label="Publications and presentations">
+  <section id="home-publications" data-source="{{ '/publications/' | relative_url }}" aria-labelledby="combined-publications-title">
+    <header class="panel combined-title"><h2 id="combined-publications-title">Publications</h2></header>
+    <div data-combined-content>{% include publications-index.html combined=true %}</div>
+  </section>
+  <section id="home-presentations" data-source="{{ '/presentations/' | relative_url }}" aria-labelledby="combined-presentations-title">
+    <header class="panel combined-title"><h2 id="combined-presentations-title">Presentations</h2></header>
+    <div data-combined-content>{% include presentations-index.html combined=true %}</div>
+  </section>
+</aside>
+<aside class="home-combined home-right" id="home-right" aria-label="Articles">
+  <section id="home-articles" data-source="{{ '/articles/' | relative_url }}" aria-labelledby="combined-articles-title">
+    <header class="panel combined-title"><h2 id="combined-articles-title">Articles</h2></header>
+    {% capture home_articles_content %}{% include content/articles.md %}{% endcapture %}
+    {% assign home_articles_html = home_articles_content | markdownify %}
+    <div data-combined-content>{% include sections.html content=home_articles_html %}</div>
+  </section>
+</aside>
+</div>
+<script src="{{ '/assets/js/home.js' | relative_url }}"></script>

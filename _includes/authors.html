@@ -1,0 +1,15 @@
+{%- assign author_keys = include.authors | join: '|' | split: '|' -%}
+{%- for author_key in author_keys -%}
+{%- assign author_record = site.data.authors[author_key] -%}
+{%- assign author_name = author_record.name | default: author_key -%}
+{%- unless forloop.first -%}
+{%- if include.format == 'citation' -%}
+{%- if forloop.last -%}{% if author_keys.size > 2 %}, and {% else %} and {% endif %}{%- else -%}, {% endif -%}
+{%- else %} &#183; {% endif -%}
+{%- endunless -%}
+{%- if include.link != false and author_record.url and author_record.url != '' -%}
+<a href="{% include link-url.html url=author_record.url %}">{{ author_name | escape | replace: ' ', '&nbsp;' }}</a>
+{%- else -%}
+{{- author_name | escape -}}
+{%- endif -%}
+{%- endfor -%}
