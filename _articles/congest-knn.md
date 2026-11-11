@@ -1,5 +1,6 @@
 ---
 title: "Nearest Neighbors in CONGEST"
-category: dc
+category: results
+published: false
 date: 2026-07-10
 ---

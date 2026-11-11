@@ -1,6 +1,7 @@
 ---
 title: "Energy-Efficiency and Synchronization"
-category: dc
+category: results
+status: done
 date: 2026-07-10
 ---
 

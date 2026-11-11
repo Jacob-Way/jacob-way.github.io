@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Distributed Computing"
+title: "Landscape of Distributed Algorithms"
 type: "Talk"
 redirect_from:
   - /talks/2012-03-01-talk-1

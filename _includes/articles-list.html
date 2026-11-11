@@ -6,3 +6,12 @@
 {% endfor %}
 </ul>
 {% endif %}
+{% assign coming_soon = site.data.unpublished_articles | where: 'category', include.category | sort: 'date' | reverse %}
+{% if coming_soon.size > 0 %}
+<h3>Coming soon</h3>
+<ul>
+{% for article in coming_soon %}
+<li>{{ article.title | escape }}</li>
+{% endfor %}
+</ul>
+{% endif %}
