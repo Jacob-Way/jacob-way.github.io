@@ -76,11 +76,11 @@ Throughout, $n$ is the number of nodes, $m$ the number of edges, $D$ the hop dia
 <td markdown="span">$O(D)$</td>
 <td markdown="span">$\Omega(D)$</td>
 </tr>
-<tr>
+<!-- <tr>
 <td markdown="span">DFS tree</td>
 <td markdown="span">$\tilde O(n^{3/4}+\sqrt{Dn})$ [[GP '17]](https://groups.csail.mit.edu/tds/papers/Parter/disc17-mohsen.pdf)<br>$\tilde O(n^{2/3}+\sqrt{Dn})$ [unpublished]</td>
 <td markdown="span">$\tilde \Omega(D+\sqrt{n})$ [unpublished]</td>
-</tr>
+</tr> -->
 <tr>
 <td markdown="span">SSSP</td>
 <td markdown="span">$\tilde O(D+\sqrt{n}+n^{2/5+o(1)}D^{2/5})$ [[CF '23]](https://nairenc.github.io/nairenc_files/parallelexactsspsqrt.pdf)</td>
@@ -134,8 +134,8 @@ Throughout, $n$ is the number of nodes, $m$ the number of edges, $D$ the hop dia
 </tr>
 <tr>
 <td markdown="span">Unweighted APSP</td>
-<td markdown="span">$O(n/\log n)$ [uncertain]</td>
-<td markdown="span">$\Omega(n/\log n)$ [uncertain]</td>
+<td markdown="span">$O(n/\log n)$</td>
+<td markdown="span">$\Omega(n/\log n)$</td>
 </tr>
 <tr>
 <td markdown="span">APSP</td>
@@ -152,11 +152,11 @@ Throughout, $n$ is the number of nodes, $m$ the number of edges, $D$ the hop dia
 <td markdown="span">$\tilde O(n^{3/2+o(1)})$ [unpublished]</td>
 <td markdown="span">$\tilde \Omega(n)$ [unpublished]</td>
 </tr>
-<tr>
+<!-- <tr>
 <td markdown="span">Unweighted APMC</td>
 <td markdown="span">$\tilde O(n)$ [unpublished]</td>
 <td markdown="span">$\tilde \Omega(n)$ [unpublished]</td>
-</tr>
+</tr> -->
 <tr>
 <td markdown="span">$(1+\varepsilon)$-APMC</td>
 <td markdown="span">$\tilde O(n)$ [[KX '16]](https://arxiv.org/abs/1402.3851)</td>
@@ -170,13 +170,13 @@ Throughout, $n$ is the number of nodes, $m$ the number of edges, $D$ the hop dia
 </tr>
 <tr>
 <td markdown="span">Minimum dominating set</td>
-<td markdown="span">$\tilde O(n^2)$ [uncertain]</td>
-<td markdown="span">$\tilde\Omega(n^2)$ [uncertain]</td>
+<td markdown="span">$\tilde O(n^2)$ </td>
+<td markdown="span">$\tilde\Omega(n^2)$ </td>
 </tr>
 </tbody>
 </table>
 
-## Energy complexity: CONGEST and multi-hop RADIO
+<!-- ## Energy complexity: CONGEST and multi-hop RADIO
 
 Energy is the maximum number of awake rounds per node.
 
@@ -218,11 +218,10 @@ Energy is the maximum number of awake rounds per node.
 | Matrix multiplication | — | — | — | — | $\tilde O(n^{0.158})$ [[CKKLPS '15]](https://arxiv.org/abs/1503.04963) |
 | Triangle counting | — | — | — | — | $\tilde O(n^{0.158})$ [[CKKLPS '15]](https://arxiv.org/abs/1503.04963) |
 | Trivial upper bound | $O(m)$ | $O(m)$ | $O(n)$ | ? | $O(n)$ |
-{: .bordered-table}
+{: .bordered-table} -->
 
-## Local problems: randomized versus deterministic CONGEST
+<!-- ## Local problems: randomized versus deterministic CONGEST
 
-<!-- Each model has separate upper- and lower-bound columns. Randomized algorithms succeed with high probability except for the expected approximation guarantee already specified for maximum matching. Fix approximation parameters independently of $n$. Deterministic lower bounds can be larger than randomized ones. Bounds involving only $n$ are worst-case over degrees; the combined degree-sensitive MIS and maximal-matching bounds encode their parameter ranges with $\min$. All counts below are rounds, not energy. -->
 
 <table class="bordered-table">
 <thead>
@@ -287,9 +286,9 @@ Energy is the maximum number of awake rounds per node.
 <td markdown="span">$\tilde\Omega(n^{1/3})$ [[ILG '17]](https://arxiv.org/abs/1705.09061), [[PRS '18]](https://arxiv.org/abs/1602.08481)</td>
 </tr>
 </tbody>
-</table>
+</table> -->
 
-### Global problems with nearly matching deterministic and randomized bounds
+<!-- ### Global problems with nearly matching deterministic and randomized bounds
 
 
 
@@ -297,9 +296,9 @@ Energy is the maximum number of awake rounds per node.
 - **MST:** $\tilde\Theta(D+\sqrt n)$; the upper bound is deterministic [[KP '98]](https://courses.csail.mit.edu/6.852/15/papers/KuttenPeleg.pdf), matching the randomized lower bound [[PR '00]](https://www.cs.bgu.ac.il/~elkinm/teaching/distr_comp/autumn16/peleg_rub.pdf).
 - **$(1+\varepsilon)$-SSSP and transshipment:** deterministic $\tilde O(\varepsilon^{-1}(D+\sqrt n))$ [[GKZ '25]](https://arxiv.org/abs/2511.06581), matching the randomized round bound and the $\tilde\Omega(D+\sqrt n)$ lower bound for fixed $\varepsilon$ [[DHKKNPPW '11]](https://arxiv.org/abs/1011.3049).
 - **Exact unweighted APSP and unweighted diameter:** deterministic $O(n)$ via pipelined BFS from all sources; near-linear randomized lower bounds leave at most logarithmic factors. See the independent algorithms of [[HW '12]](https://tik-db.ee.ethz.ch/file/3addb87bcaf363395932dcb5773771e6/) and [PRT '12 ?].
-- **Exact minimum vertex cover, maximum independent set, and minimum vertex coloring:** deterministic topology gathering takes $O(m)\subseteq O(n^2)$ rounds, matching worst-case randomized $\tilde\Omega(n^2)$ lower bounds [[CKP '17]](https://arxiv.org/abs/1705.05646). Local computation is unrestricted.
+- **Exact minimum vertex cover, maximum independent set, and minimum vertex coloring:** deterministic topology gathering takes $O(m)\subseteq O(n^2)$ rounds, matching worst-case randomized $\tilde\Omega(n^2)$ lower bounds [[CKP '17]](https://arxiv.org/abs/1705.05646). Local computation is unrestricted. -->
 
-### Global problems with remaining randomized/deterministic gaps
+<!-- ### Global problems with remaining randomized/deterministic gaps
 
 
 | Problem | Randomized upper bound | Deterministic upper bound |
@@ -311,7 +310,7 @@ Energy is the maximum number of awake rounds per node.
 | Exact maximum flow / MCMF | $n^{1/2+o(1)}(D+\sqrt n)$ [[de Vos '23]](https://arxiv.org/abs/2304.01600) | - |
 | $(1+\varepsilon)$-maximum flow | $(D+\sqrt n)n^{o(1)}\varepsilon^{-3}$ [[GKKLP '15]](https://arxiv.org/abs/1508.04747) | - |
 | $\varepsilon$-Laplacian solving | $(D+\sqrt n)n^{o(1)}\log(\varepsilon^{-1})$ [[FGLPSY '21]](https://arxiv.org/abs/2012.15675) | - |
-{: .bordered-table}
+{: .bordered-table} -->
 
 
 
