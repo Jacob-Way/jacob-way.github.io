@@ -21,7 +21,7 @@
   </head>
   <body{% if publication_style %} class="publication-site"{% endif %}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="site">
+    <div class="site{% if page.wide %} site--wide{% endif %}">
       {% unless page.layout == 'home' or publication_style %}
         <header class="panel page-title">
           <h1><span class="subtitle"><a href="{{ '/' | relative_url }}">{{ site.data.profile.name | default: site.title | escape }}</a>:</span> {{ page.title | escape }}</h1>
