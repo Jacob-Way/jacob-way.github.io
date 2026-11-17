@@ -15,3 +15,6 @@ Personal academic website.
 | Build and deployment | `_config.yml` configures Jekyll, `Gemfile` declares Ruby dependencies, and `.github/workflows/jekyll.yml` builds and deploys to GitHub Pages. |
 
 Content is rendered during the Jekyll build. MathJax displays equations in the browser; no Node or JavaScript build step is required.
+
+There are several new results included in this site:
+- An $\tilde \Omega(D^2)$ lower bound for distributed diameter computation in planar graphs, and a matching upper bound.

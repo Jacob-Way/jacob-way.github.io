@@ -9,12 +9,15 @@ This article compares upper and lower bounds for various distributed graph probl
 
 To summarize, there are only a few remaining polynomial gaps in complexity for the listed global problems (in dense graphs of low diameter):
 - CONGEST DFS tree construction
+- CONGEST exact girth (unweighted)
 - CONGEST exact SSSP
+- CONGEST exact replacement paths
 - CONGEST exact max flow (and min-cost flow)
 - CONGEST exact weighted all-pairs min-cut
 - Clique exact SSSP
 - Clique exact APSP
 - Clique exact max flow (and min-cost flow)
+- Planar exact routing tables
 
 **Table of contents**
 
@@ -83,6 +86,16 @@ To summarize, there are only a few remaining polynomial gaps in complexity for t
 <td markdown="span">$\Omega(D)$</td>
 </tr>
 <tr>
+<td markdown="span">Unweighted replacement paths</td>
+<td markdown="span">$O(D)$ [[MR '24]](https://arxiv.org/abs/2205.14797)</td>
+<td markdown="span">$\Omega(D)$ [[MR '24]](https://arxiv.org/abs/2205.14797)</td>
+</tr>
+<tr>
+<td markdown="span">Unweighted replacement paths (directed)</td>
+<td markdown="span">$\tilde O(n^{2/3}+D)$ [[CCDMNS '25]](https://arxiv.org/abs/2502.15378)</td>
+<td markdown="span">$\tilde\Omega(n^{2/3}+D)$ [[CCDMNS '25]](https://arxiv.org/abs/2502.15378)</td>
+</tr>
+<tr>
 
 <td markdown="span">DFS tree</td>
 <td markdown="span">$\tilde O(n^{3/4}+\sqrt{Dn})$ [[GP '17]](https://groups.csail.mit.edu/tds/papers/Parter/disc17-mohsen.pdf)<!--<br>$\tilde O(n^{2/3}+\sqrt{Dn})$ [unpublished]--></td>
@@ -133,7 +146,24 @@ To summarize, there are only a few remaining polynomial gaps in complexity for t
 <td markdown="span">$O((D+\sqrt{n})n^{o(1)}\log(\varepsilon^{-1}))$ [[FGLPSY '22]](https://arxiv.org/abs/2012.15675)</td>
 <td markdown="span">$\tilde\Omega(D+\sqrt{n})$ [[FGLPSY '22]](https://arxiv.org/abs/2012.15675)</td>
 </tr>
+<tr><th class="table-section" colspan="3" markdown="span">Global problems with unknown complexity</th></tr>
+<tr>
+<td markdown="span">Exact girth (unweighted)</td>
+<td markdown="span">$O(n)$ [[HW '12]](https://tik-db.ee.ethz.ch/file/3addb87bcaf363395932dcb5773771e6/), [[CLM '26]](https://arxiv.org/abs/2603.27601)</td>
+<td markdown="span">$\tilde\Omega(D+\sqrt n)$ [[MR '24]](https://arxiv.org/abs/2205.14797), [[CLM '26]](https://arxiv.org/abs/2603.27601)</td>
+</tr>
+<tr>
+<td markdown="span">Weighted replacement paths</td>
+<td markdown="span">$O(T_{\mathrm{SSSP}}+h_{st})$ [[MR '24]](https://arxiv.org/abs/2205.14797), [[CF '23]](https://nairenc.github.io/nairenc_files/parallelexactsspsqrt.pdf)</td>
+<td markdown="span">$\tilde\Omega(D+\sqrt n)$ [[MR '24]](https://arxiv.org/abs/2205.14797)</td>
+
+</tr>
 <tr><th class="table-section" colspan="3" markdown="span">Global problems with high congestion ($\Omega(n)$ rounds)</th></tr>
+<tr>
+<td markdown="span">Weighted replacement paths (directed)</td>
+<td markdown="span">$\tilde O(n)$ [[MR '24]](https://arxiv.org/abs/2205.14797)</td>
+<td markdown="span">$\Omega(n/\log n)$ [[MR '24]](https://arxiv.org/abs/2205.14797)</td>
+</tr>
 <tr>
 <td markdown="span">Unweighted diameter</td>
 <td markdown="span">$O(n)$ [[PRT '12]](https://doi.org/10.1007/978-3-642-31585-5_58), [[HW '12]](https://tik-db.ee.ethz.ch/file/3addb87bcaf363395932dcb5773771e6/)</td>
@@ -185,9 +215,9 @@ To summarize, there are only a few remaining polynomial gaps in complexity for t
 
 </div>
 
-**Note:** The $O(\log^*n)$ vertex-coloring bound assumes $\Delta\geq\log^{2+\varepsilon}n$. The $O(\log^*\Delta)$ edge-coloring bound assumes $\Delta\geq\log^{1+1/\log^*n}n$. 
+**Note:** The $O(\log^*n)$ vertex-coloring bound assumes $\Delta\geq\log^{2+\varepsilon}n$. The $O(\log^*\Delta)$ edge-coloring bound assumes $\Delta\geq\log^{1+1/\log^*n}n$. $h_{st}$ is the hop lenth of the input path.
 
-**Polynomial Gaps:** DFS, exact SSSP, exact max flow, exact APMC.
+**Polynomial Gaps:** DFS, exact girth, exact SSSP, weighted undirected replacement paths, exact max flow, exact APMC.
 
 ## Congested clique
 
@@ -201,6 +231,7 @@ $\rho\leq 1-2/\omega+\delta$ for any constant $\delta>0$ and matrix-multiplicati
 | --- | --- | --- |
 | MST | $O(1)$ [[Nowicki '21]](https://arxiv.org/abs/1912.04239) | $\Omega(1)$ |
 | Min Cut | $\operatorname{polylog}(n)$ [[GZ '22]](https://arxiv.org/abs/2205.14967) | $\Omega(1)$ |
+| Exact APMC | $O(n)$ trivial | $\Omega(1)$ |
 | Exact SSSP | $\tilde O(n^{1/6})$ [[CDKL '19]](https://arxiv.org/abs/1903.05956) | $\Omega(1)$ |
 | $(1+\varepsilon)$-SSSP | $O(\log^2 n/\varepsilon)$ [[CDKL '19]](https://arxiv.org/abs/1903.05956) | $\Omega(1)$ |
 | Exact APSP | $\tilde O(n^\rho)$ [[CKKLPS '15]](https://arxiv.org/html/1503.04963v1#S3.SS3) | $\Omega(1)$ |
@@ -227,21 +258,34 @@ $\rho\leq 1-2/\omega+\delta$ for any constant $\delta>0$ and matrix-multiplicati
 | Problem | Upper bound in rounds | Lower bound in rounds |
 | --- | --- | --- |
 | BFS | $O(D)$ | $\Omega(D)$ |
+| Planar embedding | $\tilde O(D)$ [[GH '16]](https://groups.csail.mit.edu/tds/papers/Ghaffari/podc16-planar1.pdf) | $\Omega(D)$ [[GH '16]](https://groups.csail.mit.edu/tds/papers/Ghaffari/podc16-planar1.pdf) |
+| Balanced separator of size $O(D)$ | $\tilde O(D)$, deterministic [[JMR '25]](https://arxiv.org/abs/2504.21620v2), [[ADW '26]](https://arxiv.org/abs/2602.22916) | $\Omega(D)$ |
 | MST| $\tilde O(D)$ [[HHW '18]](https://arxiv.org/abs/1801.05127) | $\Omega(D)$ |
 | DFS| $\tilde O(D)$ [[JMR '25]](https://arxiv.org/abs/2504.21620v2) | $\Omega(D)$ |
 | Minimum Cut | $\tilde O(D)$ [[GZ '22]](https://arxiv.org/abs/2205.14967) | $\Omega(D)$ |
 | $(1+\varepsilon)$-SSSP| $\tilde O(\varepsilon^{-1}D)$ [[RGHZL '22]](https://arxiv.org/html/2204.05874#S1) [[GKZ '25]](https://arxiv.org/abs/2511.06581) | $\Omega(D)$ |
 | $(1+\varepsilon)$-transshipment| $\tilde O(\varepsilon^{-1}D)$ [[RGHZL '22]](https://arxiv.org/html/2204.05874#S1) [[GKZ '25]](https://arxiv.org/abs/2511.06581) | $\Omega(D)$ |
 | Exact SSSP | $\tilde O(\min\{D^2,n\})$ [[LP '19]](https://arxiv.org/abs/1912.11491), [[JMR '25]](https://arxiv.org/abs/2504.21620v2) <br> $\tilde O(D)$ [[Senge '26, unverified]](https://arxiv.org/html/2611.02256v1#S3.SS1) | $\Omega(D)$ |
+| Exact APSP (unweighted, compact distance labels) | $\tilde O(D)$ [[LP '19]](https://arxiv.org/html/1912.11491#S4.SS3) | $\Omega(D)$ |
+| Exact APSP (weighted, compact distance labels) | $\tilde O(\min\{D^2,n\})$ [[LP '19]](https://arxiv.org/html/1912.11491#S5) | $\Omega(D)$ |
+| $(1+\varepsilon)$-APSP (compact distance labels) | $\tilde O(\varepsilon^{-3}D)$ [[DGGHW '23]](https://arxiv.org/abs/2305.02854) | $\Omega(D)$ |
+| Unweighted replacement paths | $O(D)$ [[MR '24]](https://arxiv.org/abs/2205.14797) | $\Omega(D)$ |
+| Weighted replacement paths | $\tilde O(D+h_{st})$ [[MR '24]](https://arxiv.org/abs/2205.14797) | $\Omega(D)$ |
 | $(1+\varepsilon)$-SSSP (directed) | $\tilde O(D)$ [[LTY '26]](https://arxiv.org/abs/2606.31192v2) | $\Omega(D)$ |
 | Exact maximum $st$-flow (directed) | $\tilde O(\min\{D^2,n\})$ [[ADPW '25]](https://arxiv.org/abs/2411.11718v4), [[JMR '25]](https://arxiv.org/abs/2504.21620v2) <br> $\tilde O(D)$ [[Senge '26, unverified]](https://arxiv.org/html/2611.02256v1#S3.SS1) | $\Omega(D)$ |
 | $(1-\epsilon)$-approximate maximum $st$-flow | $\tilde O(\epsilon^{-2}D)$ [[ADW '26]](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.DISC.2026.19) | $\Omega(D)$ |
 | MWC | $\tilde O(D)$ [[ADPW '25]](https://arxiv.org/abs/2411.11718v4) | $\Omega(D)$ |
 | Diameter | $\tilde O(\min\{D^3,n\})$ [[FMW '26]](https://arxiv.org/abs/2608.07187) <br> $\tilde O(D^2)$ [[unpublished]](/articles/tight-planar-diameter/) | $\tilde \Omega(D^2)$ [[unpublished]](/articles/tight-planar-diameter/) |
 | Weighted diameter | $O(n)$ | $\Omega(n/\log n)$ [[ACK '20]](https://arxiv.org/abs/2007.02377) |
+| Weighted APMC | $O(n)$ | $\Omega(n)$ |
 {: .bordered-table}
 
 </div>
+
+<!-- **Compact APSP output:** Each vertex stores a label, and the two endpoint labels suffice to decode their distance (or its approximation) locally. The exact constructions above use $\tilde O(D)$ bits per label [[LP '19]](https://arxiv.org/html/1912.11491#S5). The approximate oracle follows from the root distances in the $\tilde O(\varepsilon^{-1})$-bit routing labels of [[DGGHW '23, §6.3]](https://arxiv.org/html/2305.02854#S6.SS3): minimize the sum of the two root distances over trees common to the endpoint labels. These are label-construction bounds; explicitly distributing all labels or all distances to every vertex requires additional communication. The $O(n)$ fallback gathers and broadcasts the planar topology, after which labels can be computed locally. -->
+
+**Planar replacement paths:** The weighted upper bound follows by applying the $O(T_{\mathrm{SSSP}}+h_{st})$ reduction of [[MR '24]](https://arxiv.org/abs/2205.14797) to the $\tilde O(D^2)$ planar SSSP algorithm of [[LP '19]](https://arxiv.org/abs/1912.11491), with $O(n)$ topology gathering as a fallback. The separator row concerns a balanced separator of size $O(D)$ obtained from a BFS tree.
+
 
 
 <!-- ## Energy complexity: CONGEST and multi-hop RADIO
