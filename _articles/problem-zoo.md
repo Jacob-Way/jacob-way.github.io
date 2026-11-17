@@ -223,7 +223,7 @@ To summarize, there are only a few remaining polynomial gaps in complexity for t
 
 The communication graph is complete, although the input graph may be arbitrary.
 
-$\rho\leq 1-2/\omega+\delta$ for any constant $\delta>0$ and matrix-multiplication exponent $\omega$. In particular, $\rho<0.158$.
+$\rho\leq 1-2/\omega+\delta$ for any constant $\delta>0$ and matrix-multiplication exponent $\omega$. In particular, $\rho<0.157$ using [[DEKMRSZAVB '26]](https://arxiv.org/abs/2608.16884) and $\rho\leq \frac{1}{9}$ using [[OpenAI '26]](https://github.com/openai/math/blob/main/preprints/Matrix-Multiplication-Nine-Fourths-October-2-2026/paper.pdf).
 
 <div class="reference-table" role="region" aria-label="Congested clique round bounds" tabindex="0" markdown="1">
 
