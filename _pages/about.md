@@ -9,6 +9,6 @@ redirect_from:
 
 ## Research
 
-I study theoretical distributed computing and graph algorithms. My interests include message complexity and graph problems.
+I study theoretical distributed computing and graph algorithms.
 
 More information: [publications]({{ '/publications/' | relative_url }}) · [presentations]({{ '/presentations/' | relative_url }}) · [articles]({{ '/articles/' | relative_url }}) · [CV]({{ '/cv/' | relative_url }})
