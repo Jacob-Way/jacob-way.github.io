@@ -1,7 +1,7 @@
 ---
 title: "Universally Optimal and Message-Optimal Algorithms for Known Topologies"
 category: results
-published: true
+published: false
 status: in-progress
 date: 2026-01-28
 ---
